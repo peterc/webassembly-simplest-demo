@@ -10,7 +10,8 @@ There's a lot of out of date guides out there, so the goal here is to keep thing
 
 Here's a basic Fibonacci sequence algorithm written in C:
 
-```int fib(int n) {
+```c
+int fib(int n) {
   int a = 0, b = 1, c = 0;
 
   for (int i = 1; i <= n; i++) {
@@ -20,7 +21,8 @@ Here's a basic Fibonacci sequence algorithm written in C:
   }
 
   return a;
-}```
+}
+```
 
 Store that in a file called `fib.c`
 
@@ -32,7 +34,9 @@ On macOS with [homebrew](https://brew.sh/) installed, run ``brew install llvm```
 
 Once you have `clang` in play, this is how to compile `fib.c` to `fib.wasm`:
 
-```/usr/local/opt/llvm/bin/clang fib.c -o fib.wasm --target=wasm32 -nostdlib -fvisibility=default -Xlinker --no-entry -Xlinker -export-dynamic```
+```
+/usr/local/opt/llvm/bin/clang fib.c -o fib.wasm --target=wasm32 -nostdlib -fvisibility=default -Xlinker --no-entry -Xlinker -export-dynamic
+```
 
 You should now have a `fib.wasm` file to play with.
 
@@ -40,7 +44,9 @@ You should now have a `fib.wasm` file to play with.
 
 Using a recent version of Node (8+):
 
-```node node.js```
+```
+node node.js
+```
 
 Read the source code for the mechanism involved.
 
@@ -48,7 +54,9 @@ Read the source code for the mechanism involved.
 
 Serve `index.html` over HTTP. The easiest way to do this on most systems is:
 
-```python -m SimpleHTTPServer 3000```
+```
+python -m SimpleHTTPServer 3000
+```
 
 Then navigate to `http://localhost:3000`
 
