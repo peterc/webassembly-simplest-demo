@@ -30,7 +30,7 @@ Store that in a file called `fib.c`
 
 You need to be running the latest version of [llvm/clang](https://llvm.org/) for the compilation to be relatively straightforward. The version of clang that comes with macOS/Xcode is NOT suitable.
 
-On macOS with [homebrew](https://brew.sh/) installed, run ``brew install llvm```
+On macOS with [homebrew](https://brew.sh/) installed, run `brew install llvm`
 
 Once you have `clang` in play, this is how to compile `fib.c` to `fib.wasm`:
 
@@ -58,6 +58,6 @@ Serve `index.html` over HTTP. The easiest way to do this on most systems is:
 python -m SimpleHTTPServer 3000
 ```
 
-Then navigate to `http://localhost:3000`
+Then navigate to http://localhost:3000/
 
 Read the source code for the mechanism involved and some extra comments on its operation.
