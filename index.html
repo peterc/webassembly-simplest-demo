@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>WebAssembly demo</title>
+</head>
+<body>
+  <p>fib(30) = <span id="fib30">???</span></p>
+
+  <script>
+    function runCode(wasm) {
+      // Show off what's in the wasm object
+      console.dir(wasm);
+
+      // Populate #fib30 with the result of a call to the
+      // C 'fib' function (as defined in fib.c)
+      document.getElementById('fib30').innerHTML = wasm.fib(30);
+    }
+
+    // If the HTTP server can return fib.wasm with the correct
+    // MIME type, then this will work:
+    //
+    // WebAssembly.instantiateStreaming(fetch('fib.wasm'))
+    //   .then(obj => {
+    //     runCode(obj.instance.exports);
+    //   });
+
+    // Otherwise, we need to do it by hand..
+    fetch("fib.wasm")
+      .then(raw => { raw.arrayBuffer()
+        .then(buffer => { WebAssembly.instantiate(buffer)
+          .then(obj => { runCode(obj.instance.exports) })
+        })
+      });
+  </script>
+</body>
+</html>
