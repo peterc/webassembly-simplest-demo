@@ -6,6 +6,8 @@ There's a lot of out of date guides out there, so the goal here is to keep thing
 
 *Note: This is aimed at macOS-based users. Everything will be generally fine for Linux users too, but installing a recent version of LLVM/clang (or even Emscripten) is a real minefield unless you know what you're doing.*
 
+*Another note: Surma has written [a fantastic tutorial](https://dassur.ma/things/c-to-webassembly/) which goes much deeper into the stuff covered in this repo. I strongly recommend it.*
+
 ## Write a function in C
 
 Here's a basic Fibonacci sequence algorithm written in C:
