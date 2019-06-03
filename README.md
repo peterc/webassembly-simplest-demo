@@ -32,6 +32,8 @@ You need to be running the latest version of [llvm/clang](https://llvm.org/) for
 
 On macOS with [homebrew](https://brew.sh/) installed, run `brew install llvm`
 
+You can also download pre-built binaries from [here](http://releases.llvm.org/download.html) for most operating systems.
+
 Once you have `clang` in play, this is how to compile `fib.c` to `fib.wasm`:
 
 ```
