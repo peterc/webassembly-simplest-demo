@@ -40,6 +40,12 @@ Once you have `clang` in play, this is how to compile `fib.c` to `fib.wasm`:
 
 You should now have a `fib.wasm` file to play with.
 
+@julien has supplied a `Makefile` which also runs the above, though note you may need to prefix running `make` with a different `PATH` if you are using a separate build of `clang` like above. For example:
+
+```
+PATH=/usr/local/opt/llvm/bin:$PATH make
+```
+
 ## How to run the WebAssembly in Node.js
 
 Using a recent version of Node (8+):
