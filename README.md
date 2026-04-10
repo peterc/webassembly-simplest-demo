@@ -1,16 +1,26 @@
-# A simple, raw WebAssembly demo for macOS-based developers
+# A minimal C-to-WebAssembly pipeline, for Node.js and the browser
 
-This is an attempt to show off the process of writing a simple function in C, compiling it to WebAssembly, and calling it from both Node.js and the Web browser, as of April 2019.
+Write a function in C, compile it to WebAssembly, and call it from Node.js and the browser. No Emscripten, no bundlers, just clang and wasm.
 
-There's a lot of out of date guides out there, so the goal here is to keep things both as simple as possible and working using the norms of early 2019.
+Surma has written [a fantastic tutorial](https://dassur.ma/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
 
-*Note: This is aimed at macOS-based users. Everything will be generally fine for Linux users too, but installing a recent version of LLVM/clang (or even Emscripten) is a real minefield unless you know what you're doing.*
+This guide works on macOS Tahoe as of 2026, and on modern Linux distros.
 
-*Another note: Surma has written [a fantastic tutorial](https://dassur.ma/things/c-to-webassembly/) which goes much deeper into the stuff covered in this repo. I strongly recommend it.*
+## Prerequisites
+
+You need a clang that supports the `wasm32` target and the LLVM linker (`lld`).
+
+On macOS, Apple's built-in clang does not support `wasm32`, so install Homebrew's LLVM and lld:
+
+```
+brew install llvm lld
+```
+
+On Linux, the distro clang *should* be fine. Install `clang` and `lld` packages.
 
 ## Write a function in C
 
-Here's a basic Fibonacci sequence algorithm written in C:
+Here's a basic Fibonacci sequence algorithm in `fib.c`:
 
 ```c
 int fib(int n) {
@@ -26,48 +36,36 @@ int fib(int n) {
 }
 ```
 
-Store that in a file called `fib.c`
-
-## How to Compile the C to WebAssembly
-
-You need to be running the latest version of [llvm/clang](https://llvm.org/) for the compilation to be relatively straightforward. The version of clang that comes with macOS/Xcode is NOT suitable.
-
-On macOS with [homebrew](https://brew.sh/) installed, run `brew install llvm`
-
-You can also download pre-built binaries from [here](http://releases.llvm.org/download.html) for most operating systems.
-
-Once you have `clang` in play, this is how to compile `fib.c` to `fib.wasm`:
+## Compile to WebAssembly
 
 ```
-/usr/local/opt/llvm/bin/clang fib.c -o fib.wasm --target=wasm32 -nostdlib -fvisibility=default -Xlinker --no-entry -Xlinker -export-dynamic
+make
 ```
 
-You should now have a `fib.wasm` file to play with.
-
-@julien has supplied a `Makefile` which also runs the above, though note you may need to prefix running `make` with a different `PATH` if you are using a separate build of `clang` like above. For example:
+The Makefile picks Homebrew's clang on macOS and the distro `clang` on Linux. You can also run the command directly:
 
 ```
-PATH=/usr/local/opt/llvm/bin:$PATH make
+clang fib.c -o fib.wasm \
+  --target=wasm32 -nostdlib -fvisibility=default -fuse-ld=lld \
+  -Xlinker --no-entry -Xlinker -export-dynamic
 ```
 
-## How to run the WebAssembly in Node.js
+On macOS, replace `clang` with `$(brew --prefix llvm)/bin/clang`.
 
-Using a recent version of Node (8+):
+## Run in Node.js
 
 ```
 node node.js
 ```
 
-Read the source code for the mechanism involved.
+`bun node.js` also works!
 
-## How to run the WebAssembly in the browser
+## Run in the browser
 
-Serve `index.html` over HTTP. The easiest way to do this on most systems is:
+Serve over HTTP (needed for `WebAssembly.instantiateStreaming`):
 
 ```
-python -m SimpleHTTPServer 3000
+python3 -m http.server 3000
 ```
 
-Then navigate to http://localhost:3000/
-
-Read the source code for the mechanism involved and some extra comments on its operation.
+Then open http://localhost:3000/
