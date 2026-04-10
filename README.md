@@ -1,12 +1,13 @@
-# A minimal C-to-WebAssembly pipeline, for Node.js and the browser
+# A minimal C-to-WebAssembly pipeline, for Node/Bun and browsers
 
-Write a function in C, compile it to WebAssembly, and call it from Node.js and the browser. No Emscripten, no bundlers, just clang and wasm.
-
-Surma has written [a fantastic tutorial](https://surma.dev/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
+Write a function in C, compile it to WebAssembly, and call it from Node.js (or Bun) and the browser. No Emscripten, no bundlers, just [clang](https://clang.llvm.org/) and pure WASM.
 
 This guide works on macOS Tahoe as of 2026, and on modern Linux distros.
 
-## Prerequisites
+> [!TIP]
+> Surma has written [a fantastic tutorial](https://surma.dev/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
+
+## Requirements
 
 You need a clang that supports the `wasm32` target and the LLVM linker (`lld`).
 
@@ -20,7 +21,7 @@ On Linux, the distro clang *should* be fine. Install `clang` and `lld` packages.
 
 ## Write a function in C
 
-Here's a basic Fibonacci sequence algorithm in `fib.c`:
+Here's a basic C function (in `fib.c`):
 
 ```c
 int fib(int n) {
@@ -58,7 +59,8 @@ On macOS, replace `clang` with `$(brew --prefix llvm)/bin/clang`.
 node node.js
 ```
 
-`bun node.js` also works!
+> [!TIP]
+> `bun node.js` also works!
 
 ## Run in the browser
 
@@ -69,3 +71,7 @@ python3 -m http.server 3000
 ```
 
 Then open http://localhost:3000/
+
+## Next?
+
+If you want to go beyond basic C, things get complicated fast which is why lots of tooling dedicated to this task exists. Good luck!
