@@ -2,7 +2,7 @@
 
 Write a function in C, compile it to WebAssembly, and call it from Node.js and the browser. No Emscripten, no bundlers, just clang and wasm.
 
-Surma has written [a fantastic tutorial](https://dassur.ma/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
+Surma has written [a fantastic tutorial](https://surma.dev/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
 
 This guide works on macOS Tahoe as of 2026, and on modern Linux distros.
 
