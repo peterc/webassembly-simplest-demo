@@ -4,9 +4,6 @@ Write a function in C, compile it to WebAssembly, and call it from Node.js (or B
 
 This guide works on macOS Tahoe as of 2026, and on modern Linux distros.
 
-> [!TIP]
-> Surma has written [a fantastic tutorial](https://surma.dev/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
-
 ## Requirements
 
 You need a clang that supports the `wasm32` target and the LLVM linker (`lld`).
@@ -75,3 +72,6 @@ Then open http://localhost:3000/
 ## Next?
 
 If you want to go beyond basic C, things get complicated fast which is why lots of tooling dedicated to this task exists. Good luck!
+
+> [!TIP]
+> Surma has written [a fantastic tutorial](https://surma.dev/things/c-to-webassembly/) which goes much deeper into the stuff covered here.
